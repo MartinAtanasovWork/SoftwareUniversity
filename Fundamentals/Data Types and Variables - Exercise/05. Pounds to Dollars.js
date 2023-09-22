@@ -1,7 +1,4 @@
-function solve(a,b,c){
-   console.log(`${c} ${b} ${a}`);
+function solve(pound){
+    console.log((pound * 1.31).toFixed(3));
 }
-solve('A',
-'B',
-'C'
-)
+solve(80)
