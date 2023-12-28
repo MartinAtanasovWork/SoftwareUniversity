@@ -28,8 +28,3 @@ function garage(arr){
     }
 
 }
-garage(['1 - color: green, fuel type: petrol',
-'1 - color: dark red, manufacture: WV',
-'2 - fuel type: diesel',
-'3 - color: dark blue, fuel type: petrol']
-)
