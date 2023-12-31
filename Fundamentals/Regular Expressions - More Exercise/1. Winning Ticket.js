@@ -1,32 +1,24 @@
-function solve(arr){
-    let key = Number(arr.shift());
-    let codes = [];
-    arr.pop();
-    for(let el of arr){
-        let newCode = "";
-        for(let i=0;i < el.length;i++){
-            newCode += String.fromCharCode(el[i].charCodeAt() - key);
+function solve(string){
+    let pattern = /^.{0,4}(?<symbol>[@#$^]){6,10}.{0,4}[@#$^]{6,10}.{0,4}$/
+    let jackpotPattern = /^(?<symbol>[@#$^]){20}$/;
+    let tickets = string.split(/[, ]/);
+    for(let ticket of tickets){
+        if(ticket != ""){
+            
+            let isWinning = pattern.exec(ticket);
+            let isjackpoting = jackpotPattern.exec(ticket);
+            
+            if(ticket.length != 20)
+            {
+                console.log("invalid ticket");
+            }else if(isjackpoting !== null){
+                console.log(`ticket "${ticket}" - 10${isjackpoting.groups.symbol} Jackpot!`);
+            }else if(isWinning !== null){
+                console.log(`ticket "${ticket}" - 6${isWinning.groups.symbol}`);
+            }else{
+                console.log(`ticket "${ticket}" - no match`);
+            }
         }
-        codes.push(newCode);
-    }
-
-    let pattern = /[^\@\-\!\:\>]*@(?<name>[A-Za-z]+)[^\@\-\!\:\>]*!(?<behav>[NG])!/;
-    let good = [];
-    for(let el of codes){
-        let match = pattern.exec(el);
-        if(match !== null){
-        if(match.groups.behav == "G"){
-            good.push(match.groups.name);
-        }
-        }
-    }
-        console.log(good.join("\n"));
+    }     
 }
-solve(['3',
-'N}eideidmk$(mnyenmCNlpamnin$J$',
-'ddddkkkkmvkvmCFrqqru-nvevek$J$nmgievnge',
-'ppqmkkkmnolmnnCEhq/vkievk$Q$',
-'yyegiivoguCYdohqwlqh/kguimhk$J$',
-'end']
-
-)
+solve("$$$$$$$$$$$$$$$$$$$$, aabb  , th@@@@@@eemo@@@@@@ey");
