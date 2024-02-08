@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Contacts Builder</title>
+</head>
+
+<body>
+    <div id="main">
+        <article>
+            <div class="title">{firstName lastName}<button>&#8505;</button></div>
+            <div class="info">
+                <span>&phone; {phone}</span>
+                <span>&#9993; {email}</span>
+            </div>
+        </article>
+    </div>
+</body>
+<script>
+    class Contact{
+        firstName;
+        lastName;
+        phone;
+        email;
+
+        constructor(firstName,lastName,phone,email){
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.phone = phone;
+            this.email = email;
+            this.online = false;
+        }
+
+        makeElement(){
+            let article = document.createElement("article");
+
+            let divName = document.createElement("div");
+            divName.classList.add("title");
+            divName.textContent = `${this.firstName} ${this.lastName}`;
+            let btn = document.createElement("button");
+            btn.textContent = "&#8505;";
+            
+
+            divName.appendChild(btn);
+
+            let divInfo = document.createElement("div");
+            let span1 = document.createElement("span");
+            let span2 = document.createElement("span");
+            divInfo.classList.add("info");
+            
+            span1.innerText = `&phone; ${this.phone}`;
+            span2.textContent = `&#9993; ${this.email}`;
+
+            divInfo.appendChild(span1);
+            divInfo.appendChild(span2);
+
+            btn.addEventListener("click",toggler);
+
+            function toggler(){
+                if(divInfo.style.display == "none"){
+                    divInfo.style.display = "block";
+                }else{
+                    divInfo.style.display = "none";
+                }   
+            }
+
+            article.appendChild(divName);
+            article.appendChild(divInfo);
+
+            return article;
+        }
+
+        render(id){
+            let element = document.getElementById(id);
+
+            element.appendChild(this.makeElement());
+        }
+    }
+
+    let contacts = [
+  new Contact("Ivan", "Ivanov", "0888 123 456", "i.ivanov@gmail.com"),
+  new Contact("Maria", "Petrova", "0899 987 654", "mar4eto@abv.bg"),
+  new Contact("Jordan", "Kirov", "0988 456 789", "jordk@gmail.com")
+];
+
+contacts.forEach(c => c.render('main'));
+</script>    
+</html>
