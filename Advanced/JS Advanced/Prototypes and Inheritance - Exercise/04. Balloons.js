@@ -48,3 +48,4 @@ console.log(testBalloon);
 console.log(testPartyBalloon);
 console.log(ribbon);
 
+let str = "aa";
