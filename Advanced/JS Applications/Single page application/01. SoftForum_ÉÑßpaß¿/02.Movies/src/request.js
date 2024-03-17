@@ -3,11 +3,16 @@ export async function request(endpoint,options){
 
     try {
         let req = await fetch(url,options);
-        if(!req.ok){
+        if(!req.ok){            
             let error = await req.json();
             throw new Error(error.message); 
         }
-        let data = await req.json();
+        let data; 
+        if(req.status != 204){
+            data = await req.json();
+        }else{
+            data = {};
+        }        
         return data;
     } catch (error) {
         alert(error.message);
